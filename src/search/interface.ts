@@ -5,14 +5,14 @@ export interface Post {
   name: string;
   image: string;
   description: string;
-  dateLastEdited: Date;
+  dateLastEdited: string;
 }
 
 export interface SearchInterface {
   searchPosts(
     params: {
       query?: string;
-      sortKey?: Pick<Post, 'name' | 'dateLastEdited'>;
+      sortKey?: keyof Pick<Post, 'name' | 'dateLastEdited'>;
     } & PaginatedRequestItem
   ): Promise<{ posts: Post[] } & PaginatedResponseItem>;
 }

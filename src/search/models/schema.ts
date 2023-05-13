@@ -1,5 +1,3 @@
-import { Post } from '../interface';
-
 const data = [
   {
     name: 'Customer Assurance Liaison',
@@ -701,10 +699,8 @@ const data = [
 ];
 
 const get = (ids?: number[]) => {
-  if (!ids) return data.map((item, index) => ({ ...item, dateLastEdited: new Date(item.dateLastEdited), id: index }));
-  return data
-    .map((item, index) => ({ ...item, dateLastEdited: new Date(item.dateLastEdited), id: index }))
-    .filter((post) => ids.some((i) => i == post.id));
+  if (!ids) return data.map((item, index) => ({ ...item, id: index }));
+  return data.map((item, index) => ({ ...item, id: index })).filter((post) => ids.some((i) => i == post.id));
 };
 
 export const PostDatabase = {
