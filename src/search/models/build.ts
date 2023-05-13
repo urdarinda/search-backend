@@ -5,6 +5,7 @@ import { getTokensFromString } from './util';
 const invertedIndex: Map<string, Set<number>> = new Map();
 
 const buildIndex = () => {
+  invertedIndex.clear();
   const posts = PostDatabase.getPostByIds();
   posts.forEach((post) => addPostToIndex(post));
 };
@@ -23,9 +24,18 @@ const addPostToIndex = (post: Post) => {
   addTokensToIndex(descriptionTokens);
 };
 
-const getDocumentsForToken= async(token: string ) => invertedIndex.get(token) || new Set<number>();
+const getDocumentsForToken = async (token: string) => invertedIndex.get(token) || new Set<number>();
 
-export {
-    buildIndex,
-    getDocumentsForToken
-}
+export { buildIndex, 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  getDocumentsForToken };
