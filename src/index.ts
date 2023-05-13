@@ -3,7 +3,23 @@ import { SearchAPI } from './search';
 import { buildIndex } from './search/models/build';
 const server: FastifyInstance = Fastify({});
 
-server.get('/searchPost', async (request, reply) => {
+
+const opts = {
+  schema: {
+    querystring: {
+      query: { type: 'string' },
+      page: { type: 'integer' },
+      pageSize: { type: 'integer' },
+      sortKey: {
+        type: 'string',
+        enum: ['name', 'dateLastEdited']
+      },
+    }
+  },
+}
+
+
+server.get('/searchPost',opts, async (request, reply) => {
   return await SearchAPI.searchPost(request.query);
 });
 
