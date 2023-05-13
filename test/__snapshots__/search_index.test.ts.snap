@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`correct builds search index from existing posts given a set of posts in a databse correctly builds index for unigram tokens 1`] = `
+Map {
+  "customer" => Set {
+    1,
+  },
+  "assurance" => Set {
+    1,
+  },
+  "liaison" => Set {
+    1,
+  },
+  "my" => Set {
+    1,
+  },
+  "lion" => Set {
+    1,
+    2,
+  },
+  "king" => Set {
+    1,
+    3,
+  },
+  "is" => Set {
+    1,
+    3,
+  },
+  "nnice" => Set {
+    1,
+  },
+  "lord" => Set {
+    2,
+  },
+  "oh" => Set {
+    2,
+  },
+  "movie" => Set {
+    2,
+    3,
+  },
+  "of" => Set {
+    2,
+  },
+  "the" => Set {
+    2,
+  },
+  "rings" => Set {
+    2,
+  },
+  "something" => Set {
+    2,
+  },
+  "this" => Set {
+    3,
+  },
+  "some" => Set {
+    3,
+  },
+  "title" => Set {
+    3,
+  },
+  "with" => Set {
+    3,
+  },
+  "and" => Set {
+    3,
+  },
+  "queen" => Set {
+    3,
+  },
+  "both" => Set {
+    3,
+  },
+  "are" => Set {
+    3,
+  },
+  "awesome" => Set {
+    3,
+  },
+}
+`;
