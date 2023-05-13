@@ -8,6 +8,7 @@ const buildIndex = () => {
   invertedIndex.clear();
   const posts = PostDatabase.getPostByIds();
   posts.forEach((post) => addPostToIndex(post));
+  return invertedIndex;
 };
 
 const addPostToIndex = (post: Post) => {
