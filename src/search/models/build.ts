@@ -26,16 +26,4 @@ const addPostToIndex = (post: Post) => {
 
 const getDocumentsForToken = async (token: string) => invertedIndex.get(token) || new Set<number>();
 
-export { buildIndex, 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  getDocumentsForToken };
+export { buildIndex, getDocumentsForToken };
