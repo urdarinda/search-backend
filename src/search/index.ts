@@ -1,6 +1,6 @@
 import { DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE } from './constants';
 import { SearchInterface } from './interface';
-import SearchPostAPI from './models';
+import SearchPostAPI from './posts';
 
 const searchPost: SearchInterface['searchPosts'] = async (params) => {
   const { pageSize = DEFAULT_PAGE_SIZE, page = 0, query = undefined, sortKey = 'name' } = params;

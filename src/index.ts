@@ -1,6 +1,6 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import { SearchAPI } from './search';
-import { buildIndex } from './search/models/build';
+import { buildIndex } from './search/posts/search_index';
 const server: FastifyInstance = Fastify({});
 
 

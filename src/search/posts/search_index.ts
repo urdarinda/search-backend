@@ -1,6 +1,6 @@
 import { Post } from '../interface';
 import { PostDatabase } from './schema';
-import { getTokensFromString } from './util';
+import { getTokensFromString } from '../util';
 
 const invertedIndex: Map<string, Set<number>> = new Map();
 

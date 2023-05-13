@@ -1,7 +1,6 @@
 import { SearchAPI } from '../src/search/index';
-import * as SearchIndex from '../src/search/models/build';
-import { buildIndex } from '../src/search/models/build';
-import { PostDatabase } from '../src/search/models/schema';
+import * as SearchIndex from '../src/search/posts/search_index';
+import { PostDatabase } from '../src/search/posts/schema';
 import * as Mocks from './schema.mock';
 
 beforeEach(() => {
@@ -10,7 +9,7 @@ beforeEach(() => {
     if (!ids) return Mocks.mockPosts;
     return Mocks.mockPosts.filter((post) => ids.some((i) => i == post.id));
   });
-  buildIndex();
+  SearchIndex.buildIndex();
 });
 
 describe('test for search post api', () => {

@@ -1,5 +1,5 @@
-import { buildIndex } from '../src/search/models/build';
-import { PostDatabase } from '../src/search/models/schema';
+import * as SearchIndex from '../src/search/posts/search_index';
+import { PostDatabase } from '../src/search/posts/schema';
 import * as Mocks from './schema.mock';
 
 beforeEach(() => {
@@ -12,6 +12,6 @@ beforeEach(() => {
 
 describe('correct builds search index from existing posts', () => {
   it('given a set of posts in a databse correctly builds index for unigram tokens', () => {
-    expect(buildIndex()).toMatchSnapshot();
+    expect(SearchIndex.buildIndex()).toMatchSnapshot();
   });
 });
