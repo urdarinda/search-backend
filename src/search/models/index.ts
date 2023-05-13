@@ -1,7 +1,7 @@
 import { Post, SearchInterface } from '../interface';
+import { getDocumentsForToken } from './build';
 import { PostDatabase } from './schema';
-
-const invertedIndex: Map<string, Set<number>> = new Map();
+import { getTokensFromString } from './util';
 
 const searchPost: SearchInterface['searchPosts'] = async (params) => {
   const { numberOfItems = 10, page = 0, query = undefined, sortKey = 'name' } = params;
@@ -18,7 +18,6 @@ const searchPost: SearchInterface['searchPosts'] = async (params) => {
     });
   else allPosts = await getMatchingDocuments({ numberOfItems, page, query, sortKey });
   allPosts = allPosts.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
-
   const requiredPosts = allPosts.slice(page * numberOfItems, page * numberOfItems + numberOfItems);
   return {
     numberOfItems: requiredPosts.length,
@@ -42,7 +41,7 @@ const getMatchingDocuments = async (params) => {
   const { numberOfItems, page, query, sortKey } = params;
   const tokens = getTokensFromString(query);
 
-  const matchingDocumentMap = tokens.map((token) => invertedIndex.get(token));
+  const matchingDocumentMap = await Promise.all(tokens.map((token) => getDocumentsForToken(token)));
 
   const matchingDocuments = matchingDocumentMap.reduce((a, b) => {
     return new Set([...a].filter((x) => b.has(x)));
@@ -51,31 +50,4 @@ const getMatchingDocuments = async (params) => {
   return PostDatabase.get([...matchingDocuments]);
 };
 
-const buildIndex = () => {
-  const posts = PostDatabase.get();
-  posts.forEach((post) => addPostToIndex(post));
-  searchPost({ query: 'the king' });
-};
-
-const getTokensFromString = (s: string) =>
-  s
-    .toLowerCase()
-    .replace(/[.,;:]/g, '')
-    .trim()
-    .split(' ');
-
-const addPostToIndex = (post: Post) => {
-  const titleTokens = getTokensFromString(post.name);
-  const descriptionTokens = getTokensFromString(post.description);
-  const addTokensToIndex = (tokens: string[]) => {
-    tokens.forEach((token) => {
-      const documentIndexes = invertedIndex.get(token) ?? new Set<number>();
-      documentIndexes.add(post.id);
-      invertedIndex.set(token, documentIndexes);
-    });
-  };
-  addTokensToIndex(titleTokens);
-  addTokensToIndex(descriptionTokens);
-};
-
-export { buildIndex };
+export default { searchPost };
