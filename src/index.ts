@@ -27,7 +27,7 @@ const start = async () => {
   try {
     buildIndex();
     await server.listen({ port: 3000 });
-
+    console.log("listening on 3000")
     const address = server.server.address();
     const port = typeof address === 'string' ? address : address?.port;
   } catch (err) {
