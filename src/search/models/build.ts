@@ -5,7 +5,7 @@ import { getTokensFromString } from './util';
 const invertedIndex: Map<string, Set<number>> = new Map();
 
 const buildIndex = () => {
-  const posts = PostDatabase.get();
+  const posts = PostDatabase.getPostByIds();
   posts.forEach((post) => addPostToIndex(post));
 };
 

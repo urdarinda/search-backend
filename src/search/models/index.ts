@@ -1,6 +1,6 @@
 import { DEFAULT_PAGE_SIZE } from '../constants';
 import { Post, SearchInterface } from '../interface';
-import { getDocumentsForToken } from './build';
+import * as SearchIndex from './build';
 import { PostDatabase } from './schema';
 import { getTokensFromString } from './util';
 
@@ -9,7 +9,7 @@ const searchPost: SearchInterface['searchPosts'] = async (params) => {
 
   let allPosts: Post[];
 
-  if (!query) allPosts = PostDatabase.get();
+  if (!query) allPosts = PostDatabase.getPostByIds();
   else if (query.startsWith('"') && query.endsWith('"'))
     allPosts = await getExactMatchingDocuments({
       pageSize,
@@ -48,13 +48,13 @@ const getMatchingDocuments = async (params) => {
   const { pageSize, page, query, sortKey } = params;
   const tokens = getTokensFromString(query);
 
-  const matchingDocumentMap = await Promise.all(tokens.map((token) => getDocumentsForToken(token)));
+  const matchingDocumentMap = await Promise.all(tokens.map((token) => SearchIndex.getDocumentsForToken(token)));
 
   const matchingDocuments = matchingDocumentMap.reduce((a, b) => {
     return new Set([...a].filter((x) => b.has(x)));
   }, matchingDocumentMap[0]);
 
-  return PostDatabase.get([...matchingDocuments]);
+  return PostDatabase.getPostByIds([...matchingDocuments]);
 };
 
 export default { searchPost };

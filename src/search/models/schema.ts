@@ -698,11 +698,11 @@ const data = [
   },
 ];
 
-const get = (ids?: number[]) => {
+const getPostByIds = (ids?: number[]) => {
   if (!ids) return data.map((item, index) => ({ ...item, id: index }));
   return data.map((item, index) => ({ ...item, id: index })).filter((post) => ids.some((i) => i == post.id));
 };
 
 export const PostDatabase = {
-  get,
+  getPostByIds,
 };
